@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+  <command:command
+  xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+  xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+  xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-SPEventCache</command:name>
+      <maml:description>
+        <maml:para>Get-SPEventCache retreives the EventCache from the specified database.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>2015, Nauplius</maml:para>
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>SPEventCache</command:noun>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-SPEventCache retreives the EventCache from the specified database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-SPEventCache</maml:name>
+        
+        <command:parameter required="true" position="named" aliases="">
+          <maml:name>DatabaseName</maml:name>
+          <maml:description>
+            <maml:para>SharePoint Content Database name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        
+        <command:parameter required="true" position="named" aliases="">
+          <maml:name>DatabaseServer</maml:name>
+          <maml:description>
+            <maml:para>Database server containing SharePoint database.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+
+    <command:parameter required="true" position="named" aliases="">
+      <maml:name>DatabaseName</maml:name>
+      <maml:description>
+        <maml:para>SharePoint Content Database name.</maml:para>
+      </maml:description>
+      <command:parameterValue required="true">String</command:parameterValue>
+    </command:parameter>
+    <command:parameters>
+    <command:parameter required="true" position="named" aliases="">
+      <maml:name>DatabaseServer</maml:name>
+      <maml:description>
+        <maml:para>Database server containing SharePoint database.</maml:para>
+      </maml:description>
+      <command:parameterValue required="true">String</command:parameterValue>
+    </command:parameter>
+    
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>EventStart</maml:name>
+          <maml:description>
+            <maml:para>Start time to look at events.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">DateTime</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>EventEnd</maml:name>
+          <maml:description>
+            <maml:para>End time to look at events.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">DateTime</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>OrderBy</maml:name>
+          <maml:description>
+            <maml:para>Pick a field to order the results by.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Fields</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>SortOrder</maml:name>
+          <maml:description>
+            <maml:para>Sort the results.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Sort</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>TopRecords</maml:name>
+          <maml:description>
+            <maml:para>Return only the specified top records.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Integer</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>CorrelationId</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified Correlation Id.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>WebId</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified SPWeb Id.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>SiteId</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified SPSite Id.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>ListId</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified SPList Id.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>DocId</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified Document Id.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>ItemName</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified item name. Parameter uses Logical Operator LIKE in T-SQL query.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>ItemFullUrl</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the specified item URL. Parameter uses Logical Operator LIKE in T-SQL query.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>ModifiedBy</maml:name>
+          <maml:description>
+            <maml:para>Return records matching the name provided for the Modified By field. Parameter uses Logical Operator LIKE in T-SQL query.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>Username</maml:name>
+          <maml:description>
+            <maml:para>Connects to the database using the specified SQL Server user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+
+        <command:parameter required="false" position="named" aliases="">
+          <maml:name>Password</maml:name>
+          <maml:description>
+            <maml:para>Connects to the database using the specified SQL Server user's password.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SecureString</command:parameterValue>
+        </command:parameter>
+      </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>N/A</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Retrieves all events between two specified time frames.</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>
+          PS C:\&gt;Get-SPEventCache -DatabaseName SharePointCDB1 -DatabaseServer SPSQL -EventTime '06/25/2015 14:00' -EndTime '06/27/2015 8:00'
+        </dev:code>
+        <dev:remarks></dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Retrieves all events with a specific Correlation Id and Modified By.</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>
+          PS C:\&gt;Get-SPEventCache -DatabaseName SharePointCDB1 -DatabaseServer SPSQL -CorrelationId '3c4c149d-1f5a-200b-f1ff-af2bc00eded1' -ModifiedBy 'John'
+        </dev:code>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Retrieves List Items that have been deleted from a specific URL.</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>
+          PS C:\&gt;Get-SPEventCache -DatabaseName SharePointCDB1 -DatabaseServer SPSQL -ItemFullUrl 'sites/teams/' | where {$_.EventType -contain 'ListItem' -and $_.ObjectType -match 'Delete'}
+        </dev:code>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>The SharePoint Farm:</maml:linkText>
+        <maml:uri>http://thesharepointfarm.com</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>
