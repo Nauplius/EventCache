@@ -78,40 +78,33 @@ namespace GetSPEventCache
                     var adapter = new SqlDataAdapter(command);
                     adapter.Fill(table);
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    foreach (DataRow row in table.Rows)
                     {
+                        var eventTime = (row.ItemArray[0] as DateTime?) ?? DateTime.MinValue;
+                        var iD = (Convert.IsDBNull(row.ItemArray[1])) ? 0 : Convert.ToInt32(row.ItemArray[1]);
+                        var siteId = (row.ItemArray[2] as Guid?) ?? Guid.Empty;
+                        var webId = (row.ItemArray[3] as Guid?) ?? Guid.Empty;
+                        var listId = (row.ItemArray[4] as Guid?) ?? Guid.Empty;
+                        var itemId = (Convert.IsDBNull(row.ItemArray[5])) ? 0 : Convert.ToInt32(row.ItemArray[5]);
+                        var docId = (row.ItemArray[6] as Guid?) ?? Guid.Empty;
+                        var guid0 = (row.ItemArray[7] as Guid?) ?? Guid.Empty;
+                        var int0 = (Convert.IsDBNull(row.ItemArray[8])) ? 0 : Convert.ToInt32(row.ItemArray[8]);
+                        var int1 = (Convert.IsDBNull(row.ItemArray[9])) ? 0 : Convert.ToInt32(row.ItemArray[9]);
+                        var contentTypeId = row.ItemArray[10] == DBNull.Value ? null : (byte[])row.ItemArray[10];
+                        var itemName = (row.ItemArray[11] == null) ? string.Empty : row.ItemArray[11].ToString();
+                        var itemFullUrl = (row.ItemArray[12] == null) ? string.Empty : row.ItemArray[12].ToString();
+                        var eventType = (Convert.IsDBNull(row.ItemArray[13])) ? 0 : Convert.ToInt32(row.ItemArray[13]);
+                        var objectType = (Convert.IsDBNull(row.ItemArray[14])) ? 0 : Convert.ToInt32(row.ItemArray[14]);
+                        var modifiedBy = (row.ItemArray[15] == null) ? string.Empty : row.ItemArray[15].ToString();
+                        var timeLastModified = (row.ItemArray[16] as DateTime?) ?? DateTime.MinValue;
+                        var eventData = row.ItemArray[17] == DBNull.Value ? null : (byte[])row.ItemArray[17];
+                        var acl = row.ItemArray[18] == DBNull.Value ? null : (byte[])row.ItemArray[18];
+                        var docClientId = row.ItemArray[19] == DBNull.Value ? null : (byte[])row.ItemArray[19];
+                        var correlationId = (row.ItemArray[20] as Guid?) ?? Guid.Empty;
 
-                        while (reader.Read())
-                        {
-                            foreach (DataRow row in table.Rows)
-                            {
-                                var eventTime = (row.ItemArray[0] as DateTime?) ?? DateTime.MinValue;
-                                var iD = (Convert.IsDBNull(row.ItemArray[1])) ? 0 : Convert.ToInt32(row.ItemArray[1]);
-                                var siteId = (row.ItemArray[2] as Guid?) ?? Guid.Empty;
-                                var webId = (row.ItemArray[3] as Guid?) ?? Guid.Empty;
-                                var listId = (row.ItemArray[4] as Guid?) ?? Guid.Empty;
-                                var itemId = (Convert.IsDBNull(row.ItemArray[5])) ? 0 : Convert.ToInt32(row.ItemArray[5]);
-                                var docId = (row.ItemArray[6] as Guid?) ?? Guid.Empty;
-                                var guid0 = (row.ItemArray[7] as Guid?) ?? Guid.Empty;
-                                var int0 = (Convert.IsDBNull(row.ItemArray[8])) ? 0 : Convert.ToInt32(row.ItemArray[8]);
-                                var int1 = (Convert.IsDBNull(row.ItemArray[9])) ? 0 : Convert.ToInt32(row.ItemArray[9]);
-                                var contentTypeId = row.ItemArray[10] == DBNull.Value ? null : (byte[])row.ItemArray[10]; 
-                                var itemName = (row.ItemArray[11] == null) ? string.Empty : row.ItemArray[11].ToString();
-                                var itemFullUrl = (row.ItemArray[12] == null) ? string.Empty : row.ItemArray[12].ToString();
-                                var eventType = (Convert.IsDBNull(row.ItemArray[13])) ? 0 : Convert.ToInt32(row.ItemArray[13]);
-                                var objectType = (Convert.IsDBNull(row.ItemArray[14])) ? 0 : Convert.ToInt32(row.ItemArray[14]);
-                                var modifiedBy = (row.ItemArray[15] == null) ? string.Empty : row.ItemArray[15].ToString();
-                                var timeLastModified = (row.ItemArray[16] as DateTime?) ?? DateTime.MinValue;
-                                var eventData = row.ItemArray[17] == DBNull.Value ? null : (byte[])row.ItemArray[17];
-                                var acl = row.ItemArray[18] == DBNull.Value ? null : (byte[])row.ItemArray[18];
-                                var docClientId = row.ItemArray[19] == DBNull.Value ? null : (byte[])row.ItemArray[19]; 
-                                var correlationId = (row.ItemArray[20] as Guid?) ?? Guid.Empty;
-
-                                _data.Add(new Events(eventTime, iD, siteId, webId, listId, itemId, docId, guid0, int0, int1, contentTypeId,
-                                    itemName, itemFullUrl, eventType, objectType, modifiedBy, timeLastModified, eventData, acl, docClientId,
-                                    correlationId));
-                            }
-                        }
+                        _data.Add(new Events(eventTime, iD, siteId, webId, listId, itemId, docId, guid0, int0, int1, contentTypeId,
+                            itemName, itemFullUrl, eventType, objectType, modifiedBy, timeLastModified, eventData, acl, docClientId,
+                            correlationId));
                     }
                 }
                 connection.Close();
@@ -128,7 +121,7 @@ namespace GetSPEventCache
             var listIdGuid = ValidateGuid(listId);
             var docIdGuid = ValidateGuid(docId);
 
-            var topQuery = topRecords > 0 ? string.Format("TOP({0}) * ", topRecords) : @"* ";
+            var topQuery = topRecords > 0 ? string.Format("TOP({0}) * ", _topRecords) : @"* ";
             var orderQuery = string.Empty;
 
             if (orderBy.HasValue && orderBy != Fields.NoField)
