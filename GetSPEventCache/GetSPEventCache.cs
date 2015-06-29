@@ -137,6 +137,7 @@ namespace GetSPEventCache
             var query = SQL
                 .SELECT(topQuery)
                 .FROM("EventCache ")
+                .WITH("(NoLock)")
                 .WHERE()
                 ._If(eventStart.HasValue && eventStart != DateTime.MinValue,
                     string.Format("EventTime > '{0}'", eventStart))
