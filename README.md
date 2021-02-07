@@ -1,3 +1,7 @@
+**Repository Moved**
+
+This repository has moved to [tseward/EventCache](https://github.com/tseward/EventCache).
+
 # EventCache
 
 A powerful PowerShell cmdlet that allows you to easily query the EventCache to determine changes that have occurred in a SharePoint Content Database
